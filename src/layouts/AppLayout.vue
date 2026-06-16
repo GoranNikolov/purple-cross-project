@@ -60,7 +60,7 @@ const sidebarOpen = ref(true);
 
     <!-- Content -->
     <main class="pt-14 transition-all h-full flex flex-col" :class="sidebarOpen ? 'pl-56' : 'pl-0'">
-      <div class="p-6 flex-1 flex flex-col overflow-hidden">
+      <div class="p-6 flex-1 flex flex-col overflow-y-auto">
         <router-view />
       </div>
     </main>

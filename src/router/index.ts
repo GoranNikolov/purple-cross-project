@@ -8,7 +8,7 @@ const baseRoutes: RouteRecordRaw[] = [
   {
     path: "/",
     name: "dashboard",
-    component: () => import("@/views/DashboardView.vue"),
+    component: () => import("@/views/dashboard/DashboardView.vue"),
     meta: { title: "Dashboard", icon: "LayoutDashboard" },
   },
   {

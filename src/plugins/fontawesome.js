@@ -14,6 +14,10 @@ import {
   faEye,
   faPen,
   faTrash,
+  faUsers,
+  faUserCheck,
+  faBuilding,
+  faClock,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -27,6 +31,10 @@ library.add(
   faEye,
   faPen,
   faTrash,
+  faUsers,
+  faUserCheck,
+  faBuilding,
+  faClock,
 );
 
 export { FontAwesomeIcon };
