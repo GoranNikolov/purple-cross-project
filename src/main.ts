@@ -3,9 +3,10 @@ import { createPinia } from "pinia";
 import App from "./App.vue";
 import { router } from "./router";
 import "./assets/main.css";
-import { useThemeStore } from "@/stores/theme";
-import "./plugins/fontawesome";
+import "@/plugins/fontawesome";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { initTheme } from "@/bootstrap/initTheme.ts";
+import { initEmployees } from "./bootstrap/initEmployees.ts";
 
 const app = createApp(App);
 
@@ -16,7 +17,7 @@ app.component("FontAwesomeIcon", FontAwesomeIcon);
 app.use(createPinia());
 app.use(router);
 
-const themeStore = useThemeStore();
-themeStore.init();
+initTheme();
+initEmployees();
 
 app.mount("#app");
