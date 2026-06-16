@@ -11,6 +11,9 @@ import {
   faGripVertical,
   faArrowUpWideShort,
   faArrowDownShortWide,
+  faEye,
+  faPen,
+  faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -21,6 +24,9 @@ library.add(
   faArrowUpWideShort,
   faArrowDownShortWide,
   faGripVertical,
+  faEye,
+  faPen,
+  faTrash,
 );
 
 export { FontAwesomeIcon };
