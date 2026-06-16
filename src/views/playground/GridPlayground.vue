@@ -1,8 +1,7 @@
-<!-- src/views/playground/GridPlayground.vue -->
 <script setup lang="ts">
 import { ref } from "vue";
 import { useEmployeesStore } from "@/stores/employees";
-import { employeeGridConfig } from "@/config/employeeGridColumns";
+import { employeeGridConfig } from "@/config/grid/employeeGridColumns";
 import DataGrid from "@/components/DataGrid.vue";
 import RowActions from "@/components/ui/RowActions.vue";
 import ConfirmDialog from "@/components/ui/ConfirmDialog.vue";

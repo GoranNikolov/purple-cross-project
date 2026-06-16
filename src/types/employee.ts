@@ -1,8 +1,8 @@
 export interface Employee {
   code: string;
   fullName: string;
-  occupation: string;
-  department: string;
+  occupation: Occupation;
+  department: Department;
   dateOfEmployment: string; // ISO date string
   terminationDate: string | null;
 }
