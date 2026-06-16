@@ -162,7 +162,7 @@ function cellValue(row: T, key: string): string {
 
 <template>
   <div
-    class="border border-slate-200 dark:border-slate-700 rounded-lg overflow-hidden"
+    class="border border-slate-200 dark:border-slate-700 rounded-lg overflow-hidden h-full flex flex-col"
   >
     <!-- Group-by drop zone -->
     <div
@@ -212,7 +212,7 @@ function cellValue(row: T, key: string): string {
 
     <div
       ref="scrollContainer"
-      class="overflow-y-auto overflow-x-auto max-h-[600px]"
+      class="overflow-y-auto overflow-x-auto flex-1 min-h-0"
     >
       <table class="w-full text-sm">
         <thead>

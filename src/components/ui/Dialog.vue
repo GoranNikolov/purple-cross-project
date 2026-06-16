@@ -10,6 +10,8 @@ interface Props {
   confirmLabel?: string;
   cancelLabel?: string;
   variant?: ButtonVariant;
+  hideFooter?: boolean; // when content (slot) provides its own buttons, e.g. a form
+  maxWidth?: string; // override panel width for larger content like forms
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -18,6 +20,8 @@ const props = withDefaults(defineProps<Props>(), {
   confirmLabel: "Confirm",
   cancelLabel: "Cancel",
   variant: "primary",
+  hideFooter: false,
+  maxWidth: "max-w-md",
 });
 
 const emit = defineEmits<{
@@ -25,7 +29,6 @@ const emit = defineEmits<{
   cancel: [];
 }>();
 
-/* Lock body scroll while open */
 watch(
   () => props.open,
   (isOpen) => {
@@ -41,36 +44,42 @@ watch(
         v-if="open"
         class="fixed inset-0 z-50 flex items-center justify-center"
       >
-        <!-- Backdrop -->
         <div
           class="absolute inset-0 bg-black/40 backdrop-blur-sm"
           @click="emit('cancel')"
         />
 
-        <!-- Panel -->
         <div
-          class="relative z-10 w-full max-w-md mx-4 rounded-xl bg-white dark:bg-surface-dark shadow-2xl ring-1 ring-slate-900/5 dark:ring-white/10 overflow-hidden"
+          class="relative z-10 w-full mx-4 my-8 rounded-xl bg-white dark:bg-surface-dark shadow-2xl ring-1 ring-slate-900/5 dark:ring-white/10 overflow-hidden max-h-[90vh] flex flex-col"
+          :class="maxWidth"
         >
-          <div class="p-6 space-y-4">
+          <div class="p-6 space-y-4 overflow-y-auto">
             <h3
               class="text-lg font-semibold text-slate-900 dark:text-slate-100"
             >
               {{ title }}
             </h3>
-            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-              {{ message }}
-            </p>
+
+            <!-- Default slot: custom content like a form. Falls back to message text. -->
+            <slot>
+              <p
+                class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed"
+              >
+                {{ message }}
+              </p>
+            </slot>
           </div>
 
           <div
-            class="flex items-center justify-end gap-2 px-6 py-4 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-200 dark:border-slate-700"
+            v-if="!hideFooter"
+            class="flex items-center justify-end gap-2 px-6 py-4 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-200 dark:border-slate-700 flex-shrink-0"
           >
-            <BaseButton variant="ghost" size="sm" @click="emit('cancel')">
-              {{ cancelLabel }}
-            </BaseButton>
-            <BaseButton :variant="variant" size="sm" @click="emit('confirm')">
-              {{ confirmLabel }}
-            </BaseButton>
+            <BaseButton variant="ghost" size="sm" @click="emit('cancel')">{{
+              cancelLabel
+            }}</BaseButton>
+            <BaseButton :variant="variant" size="sm" @click="emit('confirm')">{{
+              confirmLabel
+            }}</BaseButton>
           </div>
         </div>
       </div>

@@ -38,5 +38,5 @@ export const employeeGridConfig: GridConfig<Employee> = {
     { key: "actions", label: "Actions", component: "RowActions" },
   ],
   enableGrouping: true,
-  pagination: { mode: "infinite", pageSize: 10 },
+  pagination: { mode: "paged", pageSize: 10 },
 };

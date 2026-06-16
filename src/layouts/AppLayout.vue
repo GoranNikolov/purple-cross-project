@@ -11,7 +11,7 @@ const sidebarOpen = ref(true);
 
 <template>
   <div
-    class="min-h-screen bg-surface-light-alt dark:bg-surface-dark text-slate-900 dark:text-slate-100"
+    class="h-screen overflow-hidden bg-surface-light-alt dark:bg-surface-dark text-slate-900 dark:text-slate-100"
   >
     <!-- Header -->
     <header
@@ -59,8 +59,8 @@ const sidebarOpen = ref(true);
     </aside>
 
     <!-- Content -->
-    <main class="pt-14 transition-all" :class="sidebarOpen ? 'pl-56' : 'pl-0'">
-      <div class="p-6">
+    <main class="pt-14 transition-all h-full flex flex-col" :class="sidebarOpen ? 'pl-56' : 'pl-0'">
+      <div class="p-6 flex-1 flex flex-col overflow-hidden">
         <router-view />
       </div>
     </main>
