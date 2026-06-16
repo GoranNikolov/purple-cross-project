@@ -8,8 +8,19 @@ import {
   faSun,
   faMoon,
   faTriangleExclamation,
+  faGripVertical,
+  faArrowUpWideShort,
+  faArrowDownShortWide,
 } from "@fortawesome/free-solid-svg-icons";
 
-library.add(faBars, faSun, faMoon, faTriangleExclamation);
+library.add(
+  faBars,
+  faSun,
+  faMoon,
+  faTriangleExclamation,
+  faArrowUpWideShort,
+  faArrowDownShortWide,
+  faGripVertical,
+);
 
 export { FontAwesomeIcon };

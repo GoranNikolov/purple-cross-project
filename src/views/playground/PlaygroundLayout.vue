@@ -1,7 +1,8 @@
 <script setup lang="ts">
 const subRoutes = [
   { name: "playground-buttons", label: "Buttons" },
-  { name: "playground-grid", label: "Grid / Inputs" },
+  { name: "playground-grid", label: "Grid" },
+  { name: "playground-inputs", label: "Inputs" },
   { name: "playground-forms", label: "Forms" },
 ];
 </script>

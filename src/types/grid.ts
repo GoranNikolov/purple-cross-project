@@ -3,8 +3,9 @@ export interface GridColumn<T> {
   label: string;
   sortable?: boolean;
   filterable?: boolean;
+  groupable?: boolean;
   formatter?: (row: T) => string;
-  component?: string; // name of a registered component to render in this cell, e.g. 'RowActions'
+  component?: string;
 }
 
 export type PaginationMode = "paged" | "infinite" | "none";
@@ -16,6 +17,7 @@ export interface PaginationConfig {
 
 export interface GridConfig<T> {
   columns: GridColumn<T>[];
-  rowKey: keyof T; // unique identifier field, e.g. 'code'
-  pagination?: PaginationConfig; // omit or { mode: 'none' } for no pagination
+  rowKey: keyof T;
+  pagination?: PaginationConfig;
+  enableGrouping?: boolean;
 }

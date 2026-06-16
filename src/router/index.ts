@@ -43,7 +43,13 @@ const devRoutes: RouteRecordRaw[] = [
         path: "grid",
         name: "playground-grid",
         component: () => import("@/views/playground/GridPlayground.vue"),
-        meta: { title: "Grid / Inputs" },
+        meta: { title: "Grid" },
+      },
+      {
+        path: "inputs",
+        name: "playground-inputs",
+        component: () => import("@/views/playground/InputsPlayground.vue"),
+        meta: { title: "Inputs" },
       },
       {
         path: "forms",
