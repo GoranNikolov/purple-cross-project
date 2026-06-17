@@ -18,6 +18,12 @@ import {
   faUserCheck,
   faBuilding,
   faClock,
+  faChartPie,
+  faRightLeft,
+  faFlask,
+  faGear,
+  faUserCircle,
+  faArrowRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -35,6 +41,12 @@ library.add(
   faUserCheck,
   faBuilding,
   faClock,
+  faChartPie,
+  faRightLeft,
+  faFlask,
+  faGear,
+  faUserCircle,
+  faArrowRightFromBracket,
 );
 
 export { FontAwesomeIcon };

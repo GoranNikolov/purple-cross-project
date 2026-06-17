@@ -81,6 +81,8 @@ const recentHires = computed(() =>
         :value="store.count"
         :icon="['fas', 'users']"
         accent="sky"
+        linkTo="/employees"
+        linkText="View Employees"
       />
 
       <StatCard

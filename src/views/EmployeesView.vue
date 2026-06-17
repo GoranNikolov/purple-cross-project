@@ -3,7 +3,6 @@ import { ref } from "vue";
 import { useEmployeesStore } from "@/stores/employees";
 import { employeeGridConfig } from "@/config/grid/employeeGridColumns";
 import DataGrid from "@/components/DataGrid.vue";
-import RowActions from "@/components/RowActions.vue";
 import Dialog from "@/components/ui/Dialog.vue";
 import EmployeeForm from "@/components/EmployeeForm.vue";
 import BaseButton from "@/components/ui/button/BaseButton.vue";
@@ -12,6 +11,11 @@ import {
   exportEmployeesAsCSV,
   parseImportedJSON,
 } from "@/utils/employeeIO";
+import {
+  formatDate,
+  formatEmploymentDate,
+  formatTerminationDate,
+} from "@/utils/dateStatus";
 import type { Employee } from "@/types/employee";
 
 const store = useEmployeesStore();
@@ -141,15 +145,16 @@ async function handleFileSelected(event: Event) {
     <p v-if="importError" class="text-sm text-danger-600">{{ importError }}</p>
 
     <div class="flex-1 overflow-hidden">
-      <DataGrid :rows="store.employees" :config="employeeGridConfig">
-        <template #cell-actions="{ row }: { row: Employee }">
-          <RowActions
-            @view="openView(row)"
-            @edit="openEdit(row)"
-            @delete="requestDelete(row)"
-          />
-        </template>
-      </DataGrid>
+      <DataGrid
+        :rows="store.employees"
+        :config="
+          employeeGridConfig({
+            onView: openView,
+            onEdit: openEdit,
+            onDelete: requestDelete,
+          })
+        "
+      />
     </div>
 
     <div class="w-full flex justify-end mt-auto shrink-0">
@@ -213,11 +218,24 @@ async function handleFileSelected(event: Event) {
         </div>
         <div>
           <dt class="text-slate-500 dark:text-slate-400">Date of Employment</dt>
-          <dd class="font-medium">{{ viewEmployee.dateOfEmployment }}</dd>
+          <dd class="font-medium">
+            <div>{{ formatEmploymentDate(viewEmployee) }}</div>
+            <div class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+              {{ formatDate(viewEmployee.dateOfEmployment) }}
+            </div>
+          </dd>
         </div>
         <div>
           <dt class="text-slate-500 dark:text-slate-400">Termination Date</dt>
-          <dd class="font-medium">{{ viewEmployee.terminationDate ?? "—" }}</dd>
+          <dd class="font-medium">
+            <template v-if="viewEmployee.terminationDate">
+              <div>{{ formatTerminationDate(viewEmployee) }}</div>
+              <div class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                {{ formatDate(viewEmployee.terminationDate) }}
+              </div>
+            </template>
+            <template v-else>—</template>
+          </dd>
         </div>
       </dl>
       <div class="flex justify-end gap-2 mt-6">

@@ -1,5 +1,5 @@
 <script setup lang="ts" generic="T extends Record<string, any>">
-import { ref, computed, watch } from "vue";
+import { ref, computed, watch, useSlots } from "vue";
 import type { GridConfig, GridColumn } from "@/types/grid";
 import BaseButton from "@/components/ui/button/BaseButton.vue";
 import { useInfiniteScroll } from "@/composables/useInfiniteScroll";
@@ -8,6 +8,7 @@ const props = defineProps<{
   rows: T[];
   config: GridConfig<T>;
 }>();
+const slots = useSlots();
 
 const sortKey = ref<string | null>(null);
 const sortAsc = ref(true);
@@ -157,6 +158,15 @@ function cellValue(row: T, key: string): string {
   if (column?.formatter) return column.formatter(row);
   const val = row[key];
   return val == null ? "" : String(val);
+}
+
+function hasCellSlot(key: string) {
+  return !!slots[`cell-${key}`];
+}
+
+function getCellProps(row: T, col: GridColumn<T>) {
+  if (!col.componentProps) return { row };
+  return col.componentProps(row);
 }
 </script>
 
@@ -314,11 +324,15 @@ function cellValue(row: T, key: string): string {
                 :key="String(col.key)"
                 class="p-3"
               >
-                <slot
-                  v-if="col.component"
-                  :name="`cell-${String(col.key)}`"
-                  :row="row"
-                />
+                <template v-if="hasCellSlot(String(col.key))">
+                  <slot :name="`cell-${String(col.key)}`" :row="row" />
+                </template>
+                <template v-else-if="col.component">
+                  <component
+                    :is="col.component"
+                    v-bind="getCellProps(row, col)"
+                  />
+                </template>
                 <span v-else>{{ cellValue(row, String(col.key)) }}</span>
               </td>
             </tr>
@@ -337,11 +351,15 @@ function cellValue(row: T, key: string): string {
               :key="String(col.key)"
               class="p-3"
             >
-              <slot
-                v-if="col.component"
-                :name="`cell-${String(col.key)}`"
-                :row="row"
-              />
+              <template v-if="hasCellSlot(String(col.key))">
+                <slot :name="`cell-${String(col.key)}`" :row="row" />
+              </template>
+              <template v-else-if="col.component">
+                <component
+                  :is="col.component"
+                  v-bind="getCellProps(row, col)"
+                />
+              </template>
               <span v-else>{{ cellValue(row, String(col.key)) }}</span>
             </td>
           </tr>

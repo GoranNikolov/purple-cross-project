@@ -3,7 +3,6 @@ import { ref } from "vue";
 import { useEmployeesStore } from "@/stores/employees";
 import { employeeGridConfig } from "@/config/grid/employeeGridColumns";
 import DataGrid from "@/components/DataGrid.vue";
-import RowActions from "@/components/RowActions.vue";
 import Dialog from "@/components/ui/Dialog.vue";
 import type { Employee } from "@/types/employee";
 import type { GridConfig } from "@/types/grid";
@@ -11,7 +10,11 @@ import type { GridConfig } from "@/types/grid";
 const store = useEmployeesStore();
 const mode = ref<"paged" | "infinite">("paged");
 const config = (): GridConfig<Employee> => ({
-  ...employeeGridConfig,
+  ...employeeGridConfig({
+    onView: viewEmployee,
+    onEdit: editEmployee,
+    onDelete: requestDelete,
+  }),
   pagination: { mode: mode.value, pageSize: 10 },
 });
 
@@ -54,15 +57,7 @@ function cancelDelete() {
     </div>
 
     <div class="h-[70vh] min-h-0 overflow-hidden">
-      <DataGrid :rows="store.employees" :config="config()">
-        <template #cell-actions="{ row }: { row: Employee }">
-          <RowActions
-            @view="() => viewEmployee(row)"
-            @edit="() => editEmployee(row)"
-            @delete="() => requestDelete(row)"
-          />
-        </template>
-      </DataGrid>
+      <DataGrid :rows="store.employees" :config="config()" />
     </div>
 
     <Dialog

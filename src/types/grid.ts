@@ -1,3 +1,5 @@
+import type { Component } from "vue";
+
 export interface GridColumn<T> {
   key: keyof T | "actions";
   label: string;
@@ -5,7 +7,8 @@ export interface GridColumn<T> {
   filterable?: boolean;
   groupable?: boolean;
   formatter?: (row: T) => string;
-  component?: string;
+  component?: Component;
+  componentProps?: (row: T) => Record<string, unknown>;
 }
 
 export type PaginationMode = "paged" | "infinite" | "none";

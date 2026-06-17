@@ -9,19 +9,31 @@ const baseRoutes: RouteRecordRaw[] = [
     path: "/",
     name: "dashboard",
     component: () => import("@/views/dashboard/DashboardView.vue"),
-    meta: { title: "Dashboard", icon: "LayoutDashboard" },
+    meta: { title: "Dashboard", icon: "chart-pie" },
   },
   {
     path: "/employees",
     name: "employees",
     component: () => import("@/views/EmployeesView.vue"),
-    meta: { title: "Employees", icon: "Table" },
+    meta: { title: "Employees", icon: "users" },
   },
   {
     path: "/import-export",
     name: "import-export",
     component: () => import("@/views/ImportExportView.vue"),
-    meta: { title: "Import / Export", icon: "ArrowDownUp" },
+    meta: { title: "Import / Export", icon: "right-left" },
+  },
+  {
+    path: "/settings",
+    name: "settings",
+    component: () => import("@/views/SettingsView.vue"),
+    meta: { title: "Settings", icon: "gear" },
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: () => import("@/views/LoginView.vue"),
+    meta: { layout: 'none' },
   },
 ];
 
@@ -30,7 +42,7 @@ const devRoutes: RouteRecordRaw[] = [
     path: "/playground",
     name: "playground",
     component: () => import("@/views/playground/PlaygroundLayout.vue"),
-    meta: { title: "Playground", icon: "FlaskConical" },
+    meta: { title: "Playground", icon: "flask" },
     redirect: { name: "playground-buttons" },
     children: [
       {
