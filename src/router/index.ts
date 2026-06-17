@@ -35,6 +35,12 @@ const baseRoutes: RouteRecordRaw[] = [
     component: () => import("@/views/LoginView.vue"),
     meta: { layout: "none" },
   },
+  {
+    path: "/:pathMatch(.*)*",
+    name: "not-found",
+    component: () => import("@/views/NotFoundView.vue"),
+    meta: { title: "Page Not Found" },
+  },
 ];
 
 const devRoutes: RouteRecordRaw[] = [

@@ -8,7 +8,13 @@ export interface NavItem {
 
 export function getNavItems(): NavItem[] {
   return router.options.routes
-    .filter((r) => r.meta?.title && r.name !== "settings")
+    .filter(
+      (r) =>
+        r.meta?.title &&
+        r.meta?.icon &&
+        r.name !== "settings" &&
+        r.name !== "not-found",
+    )
     .map((r) => ({
       name: r.name as string,
       label: r.meta!.title as string,
