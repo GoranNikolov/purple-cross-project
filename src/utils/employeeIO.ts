@@ -1,4 +1,11 @@
 import type { Employee } from "@/types/employee";
+import { generateTemplateCSV } from "@/utils/csvImport";
+
+export function downloadDemoCSV(): void {
+  const csv = generateTemplateCSV();
+  const blob = new Blob([csv], { type: "text/csv" });
+  downloadBlob(blob, "employees-template.csv");
+}
 
 export function exportEmployeesAsJSON(employees: Employee[]): void {
   const blob = new Blob([JSON.stringify(employees, null, 2)], {

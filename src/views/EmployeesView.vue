@@ -6,11 +6,7 @@ import DataGrid from "@/components/DataGrid.vue";
 import Dialog from "@/components/ui/Dialog.vue";
 import EmployeeForm from "@/components/EmployeeForm.vue";
 import BaseButton from "@/components/ui/button/BaseButton.vue";
-import {
-  exportEmployeesAsJSON,
-  exportEmployeesAsCSV,
-  parseImportedJSON,
-} from "@/utils/employeeIO";
+
 import {
   formatDate,
   formatEmploymentDate,
@@ -20,8 +16,6 @@ import type { Employee } from "@/types/employee";
 
 const store = useEmployeesStore();
 
-const importError = ref<string | null>(null);
-const fileInput = ref<HTMLInputElement | null>(null);
 const formOpen = ref(false);
 const formMode = ref<"create" | "edit">("create");
 const formInitialValues = ref<Employee | undefined>(undefined);
@@ -79,70 +73,13 @@ function confirmDelete() {
   confirmOpen.value = false;
   pendingDelete.value = null;
 }
-
-function triggerImport() {
-  fileInput.value?.click();
-}
-
-async function handleFileSelected(event: Event) {
-  importError.value = null;
-  const file = (event.target as HTMLInputElement).files?.[0];
-  if (!file) return;
-  try {
-    const text = await file.text();
-    const imported = parseImportedJSON(text);
-    let added = 0;
-    for (const emp of imported) {
-      if (!store.getByCode(emp.code)) {
-        store.create(emp);
-        added++;
-      }
-    }
-    importError.value =
-      added === 0
-        ? "No new employees imported (duplicate codes skipped)."
-        : null;
-  } catch (err) {
-    importError.value =
-      err instanceof Error ? err.message : "Failed to import file";
-  } finally {
-    if (fileInput.value) fileInput.value.value = "";
-  }
-}
 </script>
 
 <template>
   <div class="h-full flex flex-col gap-4">
     <div class="flex items-center justify-between flex-wrap gap-2">
       <h1 class="text-xl font-semibold">Employees</h1>
-
-      <div class="flex gap-2">
-        <input
-          ref="fileInput"
-          type="file"
-          accept=".json"
-          class="hidden"
-          @change="handleFileSelected"
-        />
-        <BaseButton variant="outline" size="sm" @click="triggerImport"
-          >Import JSON</BaseButton
-        >
-        <BaseButton
-          variant="outline"
-          size="sm"
-          @click="exportEmployeesAsJSON(store.employees)"
-          >Export JSON</BaseButton
-        >
-        <BaseButton
-          variant="outline"
-          size="sm"
-          @click="exportEmployeesAsCSV(store.employees)"
-          >Export CSV</BaseButton
-        >
-      </div>
     </div>
-
-    <p v-if="importError" class="text-sm text-danger-600">{{ importError }}</p>
 
     <div class="flex-1 overflow-hidden">
       <DataGrid

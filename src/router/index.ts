@@ -20,7 +20,7 @@ const baseRoutes: RouteRecordRaw[] = [
   {
     path: "/import-export",
     name: "import-export",
-    component: () => import("@/views/ImportExportView.vue"),
+    component: () => import("@/views/data-exchange/ImportExportView.vue"),
     meta: { title: "Import / Export", icon: "right-left" },
   },
   {
@@ -33,7 +33,7 @@ const baseRoutes: RouteRecordRaw[] = [
     path: "/login",
     name: "login",
     component: () => import("@/views/LoginView.vue"),
-    meta: { layout: 'none' },
+    meta: { layout: "none" },
   },
 ];
 

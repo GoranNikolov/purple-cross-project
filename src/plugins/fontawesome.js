@@ -24,6 +24,16 @@ import {
   faGear,
   faUserCircle,
   faArrowRightFromBracket,
+  faDownload,
+  faCloudArrowUp,
+  faCheck,
+  faXmark,
+  faArrowRight,
+  faCircleCheck,
+  faCircleExclamation,
+  faFileCsv,
+  faSpinner,
+  faTable,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -47,6 +57,17 @@ library.add(
   faGear,
   faUserCircle,
   faArrowRightFromBracket,
+  faDownload,
+  faCloudArrowUp,
+  faCheck,
+  faXmark,
+  faArrowRight,
+  faCircleCheck,
+  faCircleExclamation,
+  faFileCsv,
+  faSpinner,
+  faTable,
 );
 
 export { FontAwesomeIcon };
+
