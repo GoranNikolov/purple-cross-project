@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import { useEmployeesStore } from "@/stores/employees";
 import { employeeGridConfig } from "@/config/grid/employeeGridColumns";
-import DataGrid from "@/components/DataGrid.vue";
+import DataGrid from "@/components/grid/DataGrid.vue";
 import Dialog from "@/components/ui/Dialog.vue";
 import EmployeeForm from "@/components/EmployeeForm.vue";
 import BaseButton from "@/components/ui/button/BaseButton.vue";

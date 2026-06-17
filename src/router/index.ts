@@ -75,7 +75,16 @@ const devRoutes: RouteRecordRaw[] = [
 
 const routes = import.meta.env.DEV ? [...baseRoutes, ...devRoutes] : baseRoutes;
 
-export const router = createRouter({
+const router = createRouter({
   history: createWebHistory(),
   routes,
 });
+
+router.afterEach((to) => {
+  const baseTitle = "Purple Cross";
+  document.title = to.meta?.title
+    ? `${to.meta.title} | ${baseTitle}`
+    : baseTitle;
+});
+
+export { router };

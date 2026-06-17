@@ -1,7 +1,7 @@
 import type { GridConfig } from "@/types/grid";
 import type { Employee } from "@/types/employee";
-import EmployeeDateCell from "@/components/grid/EmployeeDateCell.vue";
-import EmployeeActionsCell from "@/components/grid/EmployeeActionsCell.vue";
+import EmployeeDateCell from "@/components/grid/cells/EmployeeDateCell.vue";
+import EmployeeActionsCell from "@/components/grid/cells/EmployeeActionsCell.vue";
 import {
   formatEmploymentDate,
   formatTerminationDate,

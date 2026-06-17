@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import DataGrid from "@/components/DataGrid.vue";
+import DataGrid from "@/components/grid/DataGrid.vue";
 import type { Employee } from "@/types/employee";
 
 defineProps<{
