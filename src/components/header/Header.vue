@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useThemeStore } from "@/stores/theme";
 import BaseButton from "@/components/ui/button/BaseButton.vue";
-import UserProfileFlyout from "./UserProfileFlyout.vue";
+import UserProfileFlyout from "@/components/UserProfileFlyout.vue";
 
 defineEmits<{
   (e: "toggle-sidebar"): void;
