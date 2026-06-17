@@ -12,7 +12,7 @@ const themeStore = useThemeStore();
 
 <template>
   <header
-    class="fixed top-0 left-0 right-0 h-14 z-20 flex items-center justify-between px-4 border-b border-slate-200 dark:border-slate-700 bg-surface-light dark:bg-surface-dark-alt"
+    class="fixed top-0 left-0 right-0 h-14 z-20 flex items-center justify-between px-4 border-b border-slate-200 dark:border-slate-700 bg-[#f9f8ff] dark:bg-surface-dark-alt transition-colors duration-200"
   >
     <div class="flex items-center gap-3">
       <button

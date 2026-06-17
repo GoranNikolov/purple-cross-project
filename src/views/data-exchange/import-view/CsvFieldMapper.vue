@@ -1,11 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import {
-  EMPLOYEE_FIELDS,
-  applyMapping,
-} from "@/utils/csvImport";
+import { EMPLOYEE_FIELDS, applyMapping } from "@/utils/csvImport";
 import BaseButton from "@/components/ui/button/BaseButton.vue";
-import type { Employee } from "@/types/employee";
 
 const props = defineProps<{
   fileName: string;
@@ -21,7 +17,13 @@ const emit = defineEmits<{
   "update:fieldMapping": [mapping: Record<string, string>];
 }>();
 
-const requiredFields = ["code", "fullName", "occupation", "department", "dateOfEmployment"];
+const requiredFields = [
+  "code",
+  "fullName",
+  "occupation",
+  "department",
+  "dateOfEmployment",
+];
 
 const mappedPreview = computed(() => {
   if (props.csvRows.length === 0) return [];
@@ -146,9 +148,7 @@ function updateMapping(fieldKey: string, csvHeader: string) {
                 :key="rIdx"
                 class="border-b border-slate-100 dark:border-slate-700/50 last:border-0"
                 :class="
-                  rIdx % 2 === 1
-                    ? 'bg-slate-50/50 dark:bg-slate-800/20'
-                    : ''
+                  rIdx % 2 === 1 ? 'bg-slate-50/50 dark:bg-slate-800/20' : ''
                 "
               >
                 <td
@@ -199,9 +199,7 @@ function updateMapping(fieldKey: string, csvHeader: string) {
           <template #icon-left>
             <font-awesome-icon icon="check" class="mr-1.5 text-xs" />
           </template>
-          Import {{ csvRows.length }} Row{{
-            csvRows.length !== 1 ? "s" : ""
-          }}
+          Import {{ csvRows.length }} Row{{ csvRows.length !== 1 ? "s" : "" }}
         </BaseButton>
       </div>
     </div>
