@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { ref } from "vue";
 import Navigation from "@/components/navigation/Navigation.vue";
 import AppHeader from "@/components/header/Header.vue";
 import MobileHeader from "@/components/header/MobileHeader.vue";
@@ -11,7 +11,7 @@ const navItems = getNavItems();
 
 const { width, isMobile } = useBreakpoint();
 
-const sidebarOpen = computed(() => width.value >= 768);
+const sidebarOpen = ref(width.value >= 768);
 </script>
 
 <template>
