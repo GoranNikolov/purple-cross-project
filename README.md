@@ -11,6 +11,7 @@ A modern employee management application built with Vue 3 that enables users to 
 - Pinia
 - Vee Validate
 - Zod
+- Tailwind
 
 ## Getting Started
 
